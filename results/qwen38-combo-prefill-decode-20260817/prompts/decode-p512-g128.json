@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "tokenizer": "/model",
+  "system_prompt_sha256": "9f1986bd8a6517a40c2433365fb4d667f0d67617a40eef5eb79cce56f1fdc44c",
+  "system_prompt_file_sha256": "1c4c8bba350db23ef64d166d2260a3a747d565f1ec682fde6b0e93224bc1dfb9",
+  "prompts": [
+    {
+      "target_tokens": 512,
+      "calibrated_tokens": 512,
+      "family": "assistant",
+      "scenario": "designed_realworld_pi_cold_context",
+      "entropy_prefix": "RUNOI3QAPXtDFhh28tsDCfERFFBptAMXD7VEQysxyo2zxxnlIF5SJo5iAkJM8BaFy6FRDb8EJlMQXSPOBNpSm5fjggVGTbxQpsU",
+      "content_sha256": "b4bca233124cd8c62cb631e9f6f7496ddb4fa3cd8f4e86765ac0652796207113",
+      "system_prompt_sha256": "9f1986bd8a6517a40c2433365fb4d667f0d67617a40eef5eb79cce56f1fdc44c",
+      "system_prompt_file_sha256": "1c4c8bba350db23ef64d166d2260a3a747d565f1ec682fde6b0e93224bc1dfb9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a concise benchmark assistant. Follow the user's request accurately."
+        },
+        {
+          "role": "user",
+          "content": "RUNOI3QAPXtDFhh28tsDCfERFFBptAMXD7VEQysxyo2zxxnlIF5SJo5iAkJM8BaFy6FRDb8EJlMQXSPOBNpSm5fjggVGTbxQpsU You are Pi, a practical private assistant. Analyze the supplied conversation and answer accurately. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response.  x x x x x x x x x x x x x x x x x"
+        }
+      ]
+    },
+    {
+      "target_tokens": 512,
+      "calibrated_tokens": 512,
+      "family": "research",
+      "scenario": "designed_realworld_pi_cold_context",
+      "entropy_prefix": "RUNxsAwimyG1Y0LjLM8cX9cAwVkreNga602ib7YZgvAHP15d2PS3uEpthreS3koZzhYW8OSI4g7OdSQM1qo4Aj9E3kYJeMCWYsU",
+      "content_sha256": "e249bf6827631890b6f57a41ce430b4aaebd6067cd1fa743762a39da07940dc0",
+      "system_prompt_sha256": "9f1986bd8a6517a40c2433365fb4d667f0d67617a40eef5eb79cce56f1fdc44c",
+      "system_prompt_file_sha256": "1c4c8bba350db23ef64d166d2260a3a747d565f1ec682fde6b0e93224bc1dfb9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a concise benchmark assistant. Follow the user's request accurately."
+        },
+        {
+          "role": "user",
+          "content": "RUNxsAwimyG1Y0LjLM8cX9cAwVkreNga602ib7YZgvAHP15d2PS3uEpthreS3koZzhYW8OSI4g7OdSQM1qo4Aj9E3kYJeMCWYsU You are helping with a technical research session. Preserve evidence, constraints, and uncertainty. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response.  x x x x x x x x x x x x x"
+        }
+      ]
+    },
+    {
+      "target_tokens": 512,
+      "calibrated_tokens": 512,
+      "family": "rag",
+      "scenario": "designed_realworld_pi_cold_context",
+      "entropy_prefix": "RUNKbMTm1z7EnBBD1p46UN1FlAohjAy2XhjoB2cqUEciS8gma9v3vbopwP83MytA8AyakssXjPePAlJt3Hv3G1sS8Z7eKgyBVMn",
+      "content_sha256": "c1e06b14dc19f670bb738f279f816374dde05e453bd7454aa3ca510437f8331c",
+      "system_prompt_sha256": "9f1986bd8a6517a40c2433365fb4d667f0d67617a40eef5eb79cce56f1fdc44c",
+      "system_prompt_file_sha256": "1c4c8bba350db23ef64d166d2260a3a747d565f1ec682fde6b0e93224bc1dfb9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a concise benchmark assistant. Follow the user's request accurately."
+        },
+        {
+          "role": "user",
+          "content": "RUNKbMTm1z7EnBBD1p46UN1FlAohjAy2XhjoB2cqUEciS8gma9v3vbopwP83MytA8AyakssXjPePAlJt3Hv3G1sS8Z7eKgyBVMn Use the following retrieved notes to answer a new question without inventing unsupported details. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response.  x x x x x x x x x x"
+        }
+      ]
+    },
+    {
+      "target_tokens": 512,
+      "calibrated_tokens": 512,
+      "family": "tool",
+      "scenario": "designed_realworld_pi_cold_context",
+      "entropy_prefix": "RUNV9wxwXidPeW9XbftFZOa3rz0uH0mDW3bNKxYOSTP058fIXIRf6Thf6F4gpTPYj8eJfGy3cXep51Tf51UZCnK1CbHvVjr6n0h",
+      "content_sha256": "2550a87f0a91a9b9d5c47760785187729a079ef6bc331a3c3e0ca31b9ddb63dc",
+      "system_prompt_sha256": "9f1986bd8a6517a40c2433365fb4d667f0d67617a40eef5eb79cce56f1fdc44c",
+      "system_prompt_file_sha256": "1c4c8bba350db23ef64d166d2260a3a747d565f1ec682fde6b0e93224bc1dfb9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a concise benchmark assistant. Follow the user's request accurately."
+        },
+        {
+          "role": "user",
+          "content": "RUNV9wxwXidPeW9XbftFZOa3rz0uH0mDW3bNKxYOSTP058fIXIRf6Thf6F4gpTPYj8eJfGy3cXep51Tf51UZCnK1CbHvVjr6n0h Review the following tool results and produce a concise operational recommendation with safety checks. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response.  x x x x x x x x"
+        }
+      ]
+    },
+    {
+      "target_tokens": 512,
+      "calibrated_tokens": 512,
+      "family": "document",
+      "scenario": "designed_realworld_pi_cold_context",
+      "entropy_prefix": "RUNDgB5wvcWzmRGx5Zxv7PMVV5GC3gWzEAyP4w6E60aPWB8GXAbSSHGeTQsbfJmrGO0clVWytwBGOjZslgqcLNBvaHzmfPyYxhS",
+      "content_sha256": "0e5704ff08c9b06e0ec4e19fccac05aea26b265fce2794e018dfd5298ecf175f",
+      "system_prompt_sha256": "9f1986bd8a6517a40c2433365fb4d667f0d67617a40eef5eb79cce56f1fdc44c",
+      "system_prompt_file_sha256": "1c4c8bba350db23ef64d166d2260a3a747d565f1ec682fde6b0e93224bc1dfb9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a concise benchmark assistant. Follow the user's request accurately."
+        },
+        {
+          "role": "user",
+          "content": "RUNDgB5wvcWzmRGx5Zxv7PMVV5GC3gWzEAyP4w6E60aPWB8GXAbSSHGeTQsbfJmrGO0clVWytwBGOjZslgqcLNBvaHzmfPyYxhS Analyze this long document as a resident assistant and retain its important facts for follow-up questions. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response.  x x x x x x x x x x x x"
+        }
+      ]
+    },
+    {
+      "target_tokens": 512,
+      "calibrated_tokens": 512,
+      "family": "assistant",
+      "scenario": "designed_realworld_pi_cold_context",
+      "entropy_prefix": "RUN0R5dbH2yzoBEYpU9YIJkYlhbObodBlNaTyk7Y43IcGT1ecV66y85cX5rg32Zwnjshwj3fxQTHk50xOBH8UY8RawE7Fram7o4",
+      "content_sha256": "4b38c47aab31e0f5160200fff73e5d98e973760add21b7fe843b422f5e3d8773",
+      "system_prompt_sha256": "9f1986bd8a6517a40c2433365fb4d667f0d67617a40eef5eb79cce56f1fdc44c",
+      "system_prompt_file_sha256": "1c4c8bba350db23ef64d166d2260a3a747d565f1ec682fde6b0e93224bc1dfb9",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a concise benchmark assistant. Follow the user's request accurately."
+        },
+        {
+          "role": "user",
+          "content": "RUN0R5dbH2yzoBEYpU9YIJkYlhbObodBlNaTyk7Y43IcGT1ecV66y85cX5rg32Zwnjshwj3fxQTHk50xOBH8UY8RawE7Fram7o4 You are Pi, a practical private assistant. Analyze the supplied conversation and answer accurately. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response. The session contains architecture notes, benchmark observations, configuration changes, user questions, tool outputs, error reports, and follow-up decisions. The assistant must distinguish measured facts from estimates, preserve exact context, identify operational risks, and provide a useful response.  x x x x x x x x x x"
+        }
+      ]
+    }
+  ]
+}
