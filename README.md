@@ -13,7 +13,7 @@ Nemotron DFlash.
 | Family | Engine | What is proven | Headline (self-report, E2) | Page |
 |---|---|---|---|---|
 | **Qwen3.6-35B-A3B** | vLLM XPU (Pi digest) | Native MTP 1/2/4, 128K | MTP4 p512/g128 **170.91** client post-first n=5 | [this README §MoE](#moe-qwen36-35b-a3b--whole-analysis) |
-| **Qwen3.8-27B** | vLLM XPU (nightly digest) | Dense GPTQ-INT4 + MTP, 4-mode | MTP4 p512/g128 **83.7** n=5 | [QWEN38-VLLM-XPU](docs/qwen38-27/QWEN38-VLLM-XPU.md) |
+| **Qwen3.8-27B** | vLLM XPU (nightly digest) | Dense GPTQ-INT4 + MTP, COMBO = gptqmodel quant on 5-patch stack | COMBO MTP4 p512/g128 **117.1** n=5 (concurrency 8/8) | [§COMBO](#qwen38-27b--combo-adoptable-stack) |
 | **Qwen3.6-27B** | vLLM XPU (same Pi digest) | Dense GPTQ-INT4 + MTP, fp8 KV | MTP4 p512/g128 **69.30** n=5 | [this README §Dense](#dense-qwen36-27b--whole-analysis) |
 | **Nemotron-3.5-Lightning-30B-A3B** | vLLM XPU (**newer** digest) | DFlash n=7; native MTP **0%** | **186.61** C1 client post-first at p2048/g128 n=5; **cold input 7160** (prompt/TTFT) at p8192/g1 | [NEMOTRON-DFLASH-B70](docs/nemotron35-30a3/NEMOTRON-DFLASH-B70.md) |
 | **Muse-Glimmer-30B** | llama.cpp SYCL | Vision + DFlash n2; vLLM still experimental | **26.8** engine t/s at p512/g128 **128K** n=5 | [MUSE-GLIMMER-B70](docs/muse-glimmer/MUSE-GLIMMER-B70.md) |
@@ -41,6 +41,52 @@ Use **this** table only for Qwen3.6 Pi / dense. Nemotron uses a different digest
 | Dense KV cache | **`fp8` required** — dense 27B needs 9.5 GiB fp16 KV at 128K, which does not fit; fp8 halves it |
 
 PyPI `vllm-xpu-kernels 0.1.12.2` is newer, but it was not installed or tested in this campaign. The historical `intel/vllm:0.21.0-xpu-int4moe` image was local and was never published.
+
+## Qwen3.8-27B — COMBO adoptable stack
+
+The adopted Qwen3.8 dense stack. It takes the Sergio **gptqmodel** checkpoint
+(`SergiioB/Qwen3.8-27B-GPTQ-Int4-sym-G128-MTP-BF16`, rev `9d189a60`, GPTQ-INT4
+g128 sym + preserved MTP BF16) and serves it on the **5-patch pinned nightly**
+(the 2 official patches plus our concurrency `ptr_wrap` + `gdn_split_mixed`
+fixes and the draft INT4 S+M1 performance pair). All four custom patches are in
+`patches/` with hashes and docs in `docs/qwen38-27/`.
+
+Reproduce end to end:
+
+```bash
+# 1. Serve (single-GPU host default; dual-GPU: ZE_AFFINITY_MASK=1 env)
+bash benchmarks/qwen38-27/launch-combo-mtp4-128k.sh /path/to/Qwen3.8-27B-GPTQ-Int4-sym-G128-MTP-BF16 8000
+# container b70-combo-qwen38; first cold start ~15 min (engine init + graph capture)
+curl -f http://127.0.0.1:8000/health
+
+# 2. Measure the full 17-cell phase-separated matrix (C1, n=5, ~2 h)
+bash benchmarks/qwen38-27/b70-combo-prefill-decode-matrix.sh ALL
+# -> results/<run-id>/summary.json + tables.md (fail-closed validation)
+```
+
+Stack pin: image `…@sha256:2c427ef477da…` (vLLM `0.26.1rc1.dev457+gc810e5ee9.xpu`,
+`vllm-xpu-kernels 0.1.12`), patch order
+`patch_mtp_nightly.py`, `patch_mtp_boundary.py`, `patch_mtp_ptr_wrap.py`,
+`patch_gdn_split_mixed.py`, `patch_draft_lmhead_int4.py`, `patch_draft_mtp_int4.py`
+(S+M1 envs `B70_DRAFT_LMHEAD_INT4=1`, `B70_DRAFT_MTP_INT4=1`; concurrency env
+`B70_SPLIT_MIXED_GDN=1`). Scheduler budget **4096**, context **131328**, KV cache
+**fp8** (mandatory at 128K), `gpu-memory-utilization 0.88` (MTP4 needs it),
+tool calling on (`qwen3_coder`), configured cap 230 W.
+
+| COMBO result (C1, median n=5, 230 W) | Value |
+|---|---:|
+| Cold prefill p512…p8192 (input/TTFT) | ~1,690–1,850 tok/s |
+| Decode p512/g128 | **117.1** client post-first |
+| Decode p8192/g128 | **105.7** |
+| Concurrent load (8/8, 8K/32K) | stable (Sergio's own 2-patch stack dies: `causal_conv1d` … `mutually exclusive`) |
+| HumanEval / MMLU | 92.7 / 72.7 |
+
+Published evidence: `results/qwen38-combo-prefill-decode-20260817/`
+(`tables.md`, `summary.json`, raw cells) and the stack comparison
+[COMPARATIVA-STACKS-20260817.md](results/qwen38-combo-prefill-decode-20260817/COMPARATIVA-STACKS-20260817.md).
+Docs: [QWEN38-VLLM-XPU.md](docs/qwen38-27/QWEN38-VLLM-XPU.md) (concurrency/ptr
+fixes) and [DRAFT-INT4-S-M1.md](docs/qwen38-27/DRAFT-INT4-S-M1.md). All E2
+self-reported; independent reproduction pending.
 
 ## Short setup
 
