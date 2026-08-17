@@ -1,6 +1,6 @@
-## Phase-separated vLLM benchmark — Qwen3.8-27B COMBO (Sergio gptqmodel quant on our 5-patch stack)
+## Phase-separated vLLM benchmark — Qwen3.8-27B COMBO (gptqmodel quant on the 5-patch stack)
 
-Tested stack: vLLM `0.26.1rc1.dev457+gc810e5ee9.xpu`, `vllm-xpu-kernels 0.1.12`, C1, `n=5`, scheduler budget 4096, fp8 KV, context 131328, prefix cache enabled with zero hit delta, configured 230 W cap, MTP4 + S+M1 draft-INT4 patches (PX2: ptr_wrap + gdn_split_mixed). Status: E2 self-reported. Snapshot 15/17 cells.
+Tested stack: vLLM `0.26.1rc1.dev457+gc810e5ee9.xpu`, `vllm-xpu-kernels 0.1.12`, C1, `n=5`, scheduler budget 4096, context 131328, fp8 KV, prefix cache enabled with zero hit delta, configured 230 W cap, MTP4 with S+M1 draft-INT4 patches. Status: E2 self-reported.
 
 ### Cold input rate (actual input tokens / TTFT, tok/s)
 
@@ -12,48 +12,46 @@ Tested stack: vLLM `0.26.1rc1.dev457+gc810e5ee9.xpu`, `vllm-xpu-kernels 0.1.12`,
 
 | Mode | g32 | g128 | g256 | g512 |
 |---|---:|---:|---:|---:|
-| MTP4 COMBO | 92.9 | 113.0 | 114.0 | 74.3 |
+| MTP4 COMBO | 92.88 | 112.98 | 114.00 | 74.32 |
 
 ### Decode at p8192 (client post-first tok/s)
 
 | Mode | g32 | g128 | g256 | g512 |
 |---|---:|---:|---:|---:|
-| MTP4 COMBO | 98.6 | 105.6 | 79.4 | 65.6 |
+| MTP4 COMBO | 98.65 | 105.59 | 79.39 | 65.59 |
 
 ### Matched historical control (p9445/g128)
 
 | Mode | Client post-first median (tok/s) |
 |---|---:|
-| MTP4 COMBO | 104.9 |
+| MTP4 COMBO | 104.86 |
 
 ### Full-context decode
 
 | Mode | p130944/g128 (tok/s) | MTP accept | p130560/g512 (tok/s) | MTP accept |
 |---|---:|---:|---:|---:|
-| MTP4 COMBO | in progress | n/a | pending | n/a |
+| MTP4 COMBO | 60.35 | 79.2% | 47.26 | 59.7% |
 
+Input rate includes request scheduling and first-token work; decode is client-observed, not engine-native. Exact output rows use the requested completion length.
 
 ### Detailed per-cell (medians, n=5)
 
-| Cell | TTFT (s) | E2E (s) | input/TTFT (tok/s) | post-first (tok/s) | MTP accept % |
----| | |---| | |---| | |---| | |---| | |---|
-| prefill-p512 | *pending* | | | | |
-| prefill-p2048 | *pending* | | | | |
-| prefill-p4096 | *pending* | | | | |
-| prefill-p6144 | *pending* | | | | |
-| prefill-p8192 | *pending* | | | | |
-| decode-p512-g32 | 0.3 | 0.6 | 1,648 | 92.9 | 80.8% |
-| decode-p512-g128 | 0.3 | 1.4 | 1,664 | 113.0 | 94.1% |
-| decode-p512-g256 | 0.3 | 2.5 | 1,663 | 114.0 | 80.6% |
-| decode-p512-g512 | 0.3 | 7.2 | 1,661 | 74.3 | 61.5% |
-| decode-p8192-g32 | 4.9 | 5.2 | 1,668 | 98.6 | 83.8% |
-| decode-p8192-g128 | 4.9 | 6.1 | 1,669 | 105.6 | 95.1% |
-| decode-control-p9445-g128 | 5.7 | 6.9 | 1,655 | 104.9 | 91.5% |
-| decode-p8192-g256 | 4.9 | 8.1 | 1,671 | 79.4 | 65.9% |
-| decode-p8192-g512 | 4.9 | 12.7 | 1,669 | 65.6 | 49.5% |
-| prefill-full-p131071 | *pending* | | | | |
-| decode-full-p130944-g128 | *pending* | | | | |
-| decode-full-p130560-g512 | *pending* | | | | |
-
-Input rate includes request scheduling + first-token work; decode is client-observed, not engine-native.
-Comparing stacks see COMPARATIVA-STACKS-20260817.md in this directory.
+| Cell | TTFT (s) | E2E (s) | input/TTFT (tok/s) | post-first (tok/s) | TPOT (ms) | MTP accept % |
+|---|---:|---:|---:|---:|---:|---:|
+| prefill-p512 | 0.28 | 0.28 | 1,806 | n/a | n/a | n/a% |
+| prefill-p2048 | 1.11 | 1.11 | 1,850 | n/a | n/a | n/a% |
+| prefill-p4096 | 2.30 | 2.30 | 1,782 | n/a | n/a | n/a% |
+| prefill-p6144 | 3.51 | 3.51 | 1,752 | n/a | n/a | n/a% |
+| prefill-p8192 | 4.85 | 4.85 | 1,690 | n/a | n/a | n/a% |
+| decode-p512-g32 | 0.31 | 0.64 | 1,648 | 92.88 | 10.8 | 80.77% |
+| decode-p512-g128 | 0.31 | 1.43 | 1,664 | 112.98 | 8.9 | 94.07% |
+| decode-p512-g256 | 0.31 | 2.54 | 1,663 | 114.00 | 8.8 | 80.59% |
+| decode-p512-g512 | 0.31 | 7.18 | 1,661 | 74.32 | 13.5 | 61.51% |
+| decode-p8192-g32 | 4.91 | 5.23 | 1,668 | 98.65 | 10.1 | 83.78% |
+| decode-p8192-g128 | 4.91 | 6.11 | 1,669 | 105.59 | 9.5 | 95.15% |
+| decode-control-p9445-g128 | 5.71 | 6.92 | 1,655 | 104.86 | 9.5 | 91.49% |
+| decode-p8192-g256 | 4.90 | 8.12 | 1,671 | 79.39 | 12.6 | 65.91% |
+| decode-p8192-g512 | 4.91 | 12.70 | 1,669 | 65.59 | 15.2 | 49.53% |
+| prefill-full-p131071 | 184.39 | 184.39 | 711 | n/a | n/a | n/a% |
+| decode-full-p130944-g128 | 184.36 | 186.51 | 710 | 60.35 | 16.6 | 79.17% |
+| decode-full-p130560-g512 | 183.75 | 194.59 | 711 | 47.26 | 21.2 | 59.69% |

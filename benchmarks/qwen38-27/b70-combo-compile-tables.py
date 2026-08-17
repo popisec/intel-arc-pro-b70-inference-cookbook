@@ -114,7 +114,11 @@ def main():
     (root / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
 
     row = {r["coordinate"]: r for r in rows}
-    def med(c, f): return row[c][f]["median"] if row[c][f] else None
+    def med(c, f):
+        v = row[c][f]
+        if isinstance(v, dict):
+            return v["median"] if v else None
+        return v
     def fmt(v, d=2): return "n/a" if v is None else f"{v:,.{d}f}"
     L = [
         "## Phase-separated vLLM benchmark — Qwen3.8-27B COMBO (gptqmodel quant on the 5-patch stack)",
@@ -144,7 +148,7 @@ def main():
     g1, g2 = row["decode-full-p130944-g128"], row["decode-full-p130560-g512"]
     a1 = f"{g1['mtp_acceptance_pct']:.1f}%" if g1["mtp_acceptance_pct"] is not None else "n/a"
     a2 = f"{g2['mtp_acceptance_pct']:.1f}%" if g2["mtp_acceptance_pct"] is not None else "n/a"
-    L.append(f"| MTP4 COMBO | {fmt(g1['client_post_first_tps']['median'])} | {a1} | {fmt(g2['client_post_first_tps']['median'])} | {a2} |")
+    L.append(f"| MTP4 COMBO | {fmt(med('decode-full-p130944-g128', 'client_post_first_tps'))} | {a1} | {fmt(med('decode-full-p130560-g512', 'client_post_first_tps'))} | {a2} |")
     L += ["",
           "Input rate includes request scheduling and first-token work; decode is client-observed, not engine-native. "
           "Exact output rows use the requested completion length.",
@@ -155,9 +159,9 @@ def main():
           "|---|---:|---:|---:|---:|---:|---:|"]
     for c in COORDS:
         r = row[c]
-        L.append(f"| {c} | {fmt(r['ttft_s']['median'])} | {fmt(r['e2e_s']['median'])} | "
-                 f"{fmt(r['input_tokens_per_ttft_s']['median'], 0)} | {fmt(r['client_post_first_tps']['median'])} | "
-                 f"{fmt(r['client_post_first_tpot_ms']['median'], 1)} | {fmt(r['mtp_acceptance_pct'])}% |")
+        L.append(f"| {c} | {fmt(med(c, 'ttft_s'))} | {fmt(med(c, 'e2e_s'))} | "
+                 f"{fmt(med(c, 'input_tokens_per_ttft_s'), 0)} | {fmt(med(c, 'client_post_first_tps'))} | "
+                 f"{fmt(med(c, 'client_post_first_tpot_ms'), 1)} | {fmt(med(c, 'mtp_acceptance_pct'))}% |")
     (root / "tables.md").write_text("\n".join(L) + "\n")
     print("summary.json + tables.md written to", root)
 
