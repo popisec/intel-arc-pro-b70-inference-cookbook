@@ -45,4 +45,4 @@ prefill-full-p131071_prompt_set_sha256=3429c3064cf5f51a2b87c179515fad0410c501523
 decode-full-p130944-g128_prompt_set_sha256=7b2eb50d96d8a7460101f97cd45bcc7031fc403731f60ff6542a58745590356e
 decode-full-p130560-g512_prompt_set_sha256=0b5a0789034bb546f0d82fe332554dc46691215400e9c014d5033a1c65ed266e
 
-status_snapshot=14_of_17_cells_completed; 3 full-context cells pending (p131071/p130944/p130560)
+status_snapshot=16_of_17_cells_completed; decode-full-p130560-g512 pending
