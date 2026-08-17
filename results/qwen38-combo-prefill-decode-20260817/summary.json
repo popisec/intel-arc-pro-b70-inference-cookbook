@@ -1,19 +1,24 @@
 {
   "schema": 1,
-  "run_id": "qwen38-combo-prefill-decode-20260817",
+  "run_id": "qwen38-combo-matrix-20260817T223428Z",
   "status": "E2_PROVISIONAL_SELF_REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
-  "scope": "C1 phase-separated vLLM; medians of n=5 per cell; single mode MTP4 COMBO (gptqmodel quant on 5-patch stack)",
-  "snapshot": "15_of_17_cells_complete; decode-full-p130944-g128 (in progress), decode-full-p130560-g512 (pending)",
-  "timing_source": "client monotonic SSE",
+  "scope": "C1 phase-separated vLLM serving; medians of five measured requests per cell; single mode MTP4 COMBO",
+  "timing_source": "client monotonic SSE timestamps",
+  "prefill_metric_warning": "input_tokens_per_ttft_s includes scheduling + first-token work; not engine-native prefill",
+  "decode_metric_warning": "client post-first rate is request-side, not engine-native",
+  "cache": "prefix caching enabled; unique entropy-first cold prompts; zero hit delta",
   "configured_power_cap_W": 230,
   "scheduler_budget": 4096,
   "max_model_len": 131328,
-  "prefix_cache": "enabled, unique entropy-first cold prompts, zero hit delta",
+  "excluded": [],
+  "mode": "mtp4",
+  "num_speculative_tokens": 4,
   "stack": {
+    "image": null,
+    "model": "Qwen3.8-27B-MTP-Preserved-GPTQ-Int4",
     "vllm": "0.26.1rc1.dev457+gc810e5ee9.xpu",
     "vllm_xpu_kernels": "0.1.12",
-    "model": "Qwen3.8-27B-MTP-Preserved-GPTQ-Int4-gptqmodel",
-    "image": "2c427ef477da092eb6f2cdbbbd24950b5fa171565b916db69d4c7bb10e68ca97"
+    "patches": "patch_mtp_nightly.py,patch_mtp_boundary.py,patch_mtp_ptr_wrap.py,patch_gdn_split_mixed.py,patch_draft_lmhead_int4.py,patch_draft_mtp_int4.py"
   },
   "rows": [
     {
@@ -24,30 +29,52 @@
       "requested_output_tokens": 1,
       "samples": 5,
       "ignore_eos": false,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 0.283533281,
         "mean": 0.283130907,
         "min": 0.280979801,
-        "max": 0.28407654
+        "max": 0.28407654,
+        "pstdev": 0.0010992747855121676
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 0.283533281,
+        "mean": 0.283130907,
+        "min": 0.280979801,
+        "max": 0.28407654,
+        "pstdev": 0.0010992747855121676
       },
       "e2e_s": {
         "n": 5,
         "median": 0.283670903,
         "mean": 0.2832720452,
         "min": 0.281121833,
-        "max": 0.284215922
+        "max": 0.284215922,
+        "pstdev": 0.001098714210382921
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1805.7844856667812,
         "mean": 1808.3781945878327,
         "min": 1802.3311604682317,
-        "max": 1822.1950409880176
+        "max": 1822.1950409880176,
+        "pstdev": 7.0577882332092905
       },
       "client_post_first_tps": null,
-      "mtp_acceptance_pct": null
+      "client_post_first_tpot_ms": null,
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 2560.0,
+      "mtp_proposed_tokens": 0,
+      "mtp_accepted_tokens": 0,
+      "mtp_acceptance_pct": null,
+      "output_sha256_by_rep": [
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6"
+      ]
     },
     {
       "mode": "mtp4",
@@ -57,30 +84,52 @@
       "requested_output_tokens": 1,
       "samples": 5,
       "ignore_eos": false,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 1.106747128,
         "mean": 1.1075796144,
         "min": 1.105540326,
-        "max": 1.111726803
+        "max": 1.111726803,
+        "pstdev": 0.0021521955620554963
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 1.106747128,
+        "mean": 1.1075796144,
+        "min": 1.105540326,
+        "max": 1.111726803,
+        "pstdev": 0.0021521955620554963
       },
       "e2e_s": {
         "n": 5,
         "median": 1.106917201,
         "mean": 1.1077275646,
         "min": 1.105701038,
-        "max": 1.111862835
+        "max": 1.111862835,
+        "pstdev": 0.0021446023146642554
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1850.4678694770464,
         "mean": 1849.083973678159,
         "min": 1842.1792066841083,
-        "max": 1852.487830462007
+        "max": 1852.487830462007,
+        "pstdev": 3.5845097140615825
       },
       "client_post_first_tps": null,
-      "mtp_acceptance_pct": null
+      "client_post_first_tpot_ms": null,
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 10240.0,
+      "mtp_proposed_tokens": 0,
+      "mtp_accepted_tokens": 0,
+      "mtp_acceptance_pct": null,
+      "output_sha256_by_rep": [
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6"
+      ]
     },
     {
       "mode": "mtp4",
@@ -90,30 +139,52 @@
       "requested_output_tokens": 1,
       "samples": 5,
       "ignore_eos": false,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 2.298205461,
         "mean": 2.2965155766,
         "min": 2.288238539,
-        "max": 2.303436749
+        "max": 2.303436749,
+        "pstdev": 0.005551654558929103
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 2.298205461,
+        "mean": 2.2965155766,
+        "min": 2.288238539,
+        "max": 2.303436749,
+        "pstdev": 0.005551654558929103
       },
       "e2e_s": {
         "n": 5,
         "median": 2.298361964,
         "mean": 2.2966667274,
         "min": 2.288374752,
-        "max": 2.303596762
+        "max": 2.303596762,
+        "pstdev": 0.005561482632189319
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1782.260145799906,
         "mean": 1783.58204731497,
         "min": 1778.2124913037933,
-        "max": 1790.0231685591762
+        "max": 1790.0231685591762,
+        "pstdev": 4.314720757183418
       },
       "client_post_first_tps": null,
-      "mtp_acceptance_pct": null
+      "client_post_first_tpot_ms": null,
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 20480.0,
+      "mtp_proposed_tokens": 0,
+      "mtp_accepted_tokens": 0,
+      "mtp_acceptance_pct": null,
+      "output_sha256_by_rep": [
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6"
+      ]
     },
     {
       "mode": "mtp4",
@@ -123,30 +194,52 @@
       "requested_output_tokens": 1,
       "samples": 5,
       "ignore_eos": false,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 3.50780674,
         "mean": 3.5110183360000002,
         "min": 3.503452253,
-        "max": 3.519157986
+        "max": 3.519157986,
+        "pstdev": 0.00642571579989307
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 3.50780674,
+        "mean": 3.5110183360000002,
+        "min": 3.503452253,
+        "max": 3.519157986,
+        "pstdev": 0.00642571579989307
       },
       "e2e_s": {
         "n": 5,
         "median": 3.507954232,
         "mean": 3.5111709161999998,
         "min": 3.503603525,
-        "max": 3.519331808
+        "max": 3.519331808,
+        "pstdev": 0.006435642765964949
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1751.5218070423116,
         "mean": 1749.9255148560032,
         "min": 1745.8721729579092,
-        "max": 1753.6987965909636
+        "max": 1753.6987965909636,
+        "pstdev": 3.201090972777072
       },
       "client_post_first_tps": null,
-      "mtp_acceptance_pct": null
+      "client_post_first_tpot_ms": null,
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 30720.0,
+      "mtp_proposed_tokens": 0,
+      "mtp_accepted_tokens": 0,
+      "mtp_acceptance_pct": null,
+      "output_sha256_by_rep": [
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6"
+      ]
     },
     {
       "mode": "mtp4",
@@ -156,30 +249,52 @@
       "requested_output_tokens": 1,
       "samples": 5,
       "ignore_eos": false,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 4.848538497,
         "mean": 4.8549330956,
         "min": 4.842644358,
-        "max": 4.871309771
+        "max": 4.871309771,
+        "pstdev": 0.01172650359171112
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 4.848538497,
+        "mean": 4.8549330956,
+        "min": 4.842644358,
+        "max": 4.871309771,
+        "pstdev": 0.01172650359171112
       },
       "e2e_s": {
         "n": 5,
         "median": 4.848706389,
         "mean": 4.8551013659999995,
         "min": 4.842842821,
-        "max": 4.871459644
+        "max": 4.871459644,
+        "pstdev": 0.011714475395531969
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1689.581304772303,
         "mean": 1687.3657345808288,
         "min": 1681.6832402588755,
-        "max": 1691.6377487987318
+        "max": 1691.6377487987318,
+        "pstdev": 4.0719060119185775
       },
       "client_post_first_tps": null,
-      "mtp_acceptance_pct": null
+      "client_post_first_tpot_ms": null,
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 40960.0,
+      "mtp_proposed_tokens": 0,
+      "mtp_accepted_tokens": 0,
+      "mtp_acceptance_pct": null,
+      "output_sha256_by_rep": [
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6",
+        "8f7e21b7f73a999622a74dd5e00ad599258a822220b4d49d215ef2e8d650c8c6"
+      ]
     },
     {
       "mode": "mtp4",
@@ -189,36 +304,66 @@
       "requested_output_tokens": 32,
       "samples": 5,
       "ignore_eos": true,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 0.310751981,
         "mean": 0.3108980494,
         "min": 0.309885278,
-        "max": 0.31199344
+        "max": 0.31199344,
+        "pstdev": 0.0007605207050429665
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 0.310751981,
+        "mean": 0.3108980494,
+        "min": 0.309885278,
+        "max": 0.31199344,
+        "pstdev": 0.0007605207050429665
       },
       "e2e_s": {
         "n": 5,
         "median": 0.644122649,
         "mean": 0.6298462172,
         "min": 0.605143994,
-        "max": 0.648263778
+        "max": 0.648263778,
+        "pstdev": 0.01990348960526672
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1647.6162061859873,
         "mean": 1646.8519620818297,
         "min": 1641.0601453671588,
-        "max": 1652.2243434875277
+        "max": 1652.2243434875277,
+        "pstdev": 4.027066217527242
       },
       "client_post_first_tps": {
         "n": 5,
         "median": 92.88114139657193,
         "mean": 97.59901317852857,
         "min": 92.0517790425679,
-        "max": 105.4737020275237
+        "max": 105.4737020275237,
+        "pstdev": 6.365441975146191
       },
-      "mtp_acceptance_pct": 80.76923076923077
+      "client_post_first_tpot_ms": {
+        "n": 5,
+        "median": 10.766448225806451,
+        "mean": 10.288650574193548,
+        "min": 9.481036322580644,
+        "max": 10.863451096774194,
+        "pstdev": 0.6538771392783823
+      },
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 2560.0,
+      "mtp_proposed_tokens": 156.0,
+      "mtp_accepted_tokens": 126.0,
+      "mtp_acceptance_pct": 80.76923076923077,
+      "output_sha256_by_rep": [
+        "749602f9c5b4de81b2d170d9781ed600a7787af80f6a04d6c99bd8939a704b63",
+        "bd2393da41427df745daa5f9dafdcb5871f808fda18f12d8d2922587fb333787",
+        "8e7d3def9fe7f50ab6b777f27f4dcadae84c58ab7f880224306495073d5c86df",
+        "8db6fd107a9a8cdcaa6a54891e5e8f732d9ebb0176f2d8f334e1fd50db47316c",
+        "40f45b4c095dd1657d43e7aeb39d90e1f37706366a90afb60ad7646009ca7981"
+      ]
     },
     {
       "mode": "mtp4",
@@ -228,36 +373,66 @@
       "requested_output_tokens": 128,
       "samples": 5,
       "ignore_eos": true,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 0.307632618,
         "mean": 0.3075603876,
         "min": 0.306730051,
-        "max": 0.308298106
+        "max": 0.308298106,
+        "pstdev": 0.0006114491177877715
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 0.307632618,
+        "mean": 0.3075603876,
+        "min": 0.306730051,
+        "max": 0.308298106,
+        "pstdev": 0.0006114491177877715
       },
       "e2e_s": {
         "n": 5,
         "median": 1.432267879,
         "mean": 1.4207075814,
         "min": 1.37946164,
-        "max": 1.462014592
+        "max": 1.462014592,
+        "pstdev": 0.03156772018481631
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1664.3228644889664,
         "mean": 1664.720311230785,
         "min": 1660.7302803216053,
-        "max": 1669.2202095320617
+        "max": 1669.2202095320617,
+        "pstdev": 3.310445888515872
       },
       "client_post_first_tps": {
         "n": 5,
         "median": 112.97565991980741,
         "mean": 114.17982982201664,
         "min": 110.07903721677424,
-        "max": 118.38935415185206
+        "max": 118.38935415185206,
+        "pstdev": 3.193119272788624
       },
-      "mtp_acceptance_pct": 94.07407407407408
+      "client_post_first_tpot_ms": {
+        "n": 5,
+        "median": 8.851464118110236,
+        "mean": 8.764938533858267,
+        "min": 8.44670542519685,
+        "max": 9.08438177952756,
+        "pstdev": 0.24405825418337257
+      },
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 2560.0,
+      "mtp_proposed_tokens": 540.0,
+      "mtp_accepted_tokens": 508.0,
+      "mtp_acceptance_pct": 94.07407407407408,
+      "output_sha256_by_rep": [
+        "1f5f08a69d0d4ad0734090080cb44cb72d7942e5b8ef8a162325b4f284a0c338",
+        "1f2e56152a1cbcdf4e1923729ac1fd831185284b72d7092629a3db4f9db5ad2a",
+        "ea27fb19487a0a6db43cdcf9cebafbe566f75a630a97c669bcf7de53f45ce5c7",
+        "5c17f070fa197edf8b90b6dba448ee1f24b12ed19d617576526eabf4a60133e7",
+        "61fb5e7da12cdc1430030de071f29de5e6b6796619cca0b3e16ecee4f51dedfc"
+      ]
     },
     {
       "mode": "mtp4",
@@ -267,36 +442,66 @@
       "requested_output_tokens": 256,
       "samples": 5,
       "ignore_eos": true,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 0.307950901,
         "mean": 0.3077824716,
         "min": 0.30743786,
-        "max": 0.308091454
+        "max": 0.308091454,
+        "pstdev": 0.0002694367712578226
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 0.307950901,
+        "mean": 0.3077824716,
+        "min": 0.30743786,
+        "max": 0.308091454,
+        "pstdev": 0.0002694367712578226
       },
       "e2e_s": {
         "n": 5,
         "median": 2.544319237,
         "mean": 2.8230370046,
         "min": 2.468057126,
-        "max": 3.486327159
+        "max": 3.486327159,
+        "pstdev": 0.4087611993333394
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1662.6027017209474,
         "mean": 1663.513811596667,
         "min": 1661.8442133094675,
-        "max": 1665.377191995807
+        "max": 1665.377191995807,
+        "pstdev": 1.4566459606768383
       },
       "client_post_first_tps": {
         "n": 5,
         "median": 114.0001403703846,
         "mean": 103.88051425828648,
         "min": 80.22967958862897,
-        "max": 118.02171905654016
+        "max": 118.02171905654016,
+        "pstdev": 15.428246460311637
       },
-      "mtp_acceptance_pct": 80.59210526315789
+      "client_post_first_tpot_ms": {
+        "n": 5,
+        "median": 8.771919023529412,
+        "mean": 9.863743266666667,
+        "min": 8.473016729411764,
+        "max": 12.464215301960785,
+        "pstdev": 1.6023028090236282
+      },
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 2560.0,
+      "mtp_proposed_tokens": 1216.0,
+      "mtp_accepted_tokens": 980.0,
+      "mtp_acceptance_pct": 80.59210526315789,
+      "output_sha256_by_rep": [
+        "cbb85b9ae7d907e7fd9f4c3fc68e55b7139d13be91abb5fbf1e9b7b184e699b4",
+        "121ecca05596f4d0eec8efd37b43d7223c1b9fa94bb7608ce519b57bbdfba3bc",
+        "026e25299f53e37006396c136bcc9701bbc643d32e8631b4dd4f429f2c736741",
+        "7f577ecca1e3ed489d991bf2cc6df9bf838fc26b8f8697e40bb3f1c2cbe01172",
+        "365576ac167abf5f459e0ad53397192ae15f3958c4d4a262d6e95670da16be68"
+      ]
     },
     {
       "mode": "mtp4",
@@ -306,36 +511,66 @@
       "requested_output_tokens": 512,
       "samples": 5,
       "ignore_eos": true,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 0.308274819,
         "mean": 0.3086615174,
         "min": 0.30780903,
-        "max": 0.310034731
+        "max": 0.310034731,
+        "pstdev": 0.0008303658472679667
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 0.308274819,
+        "mean": 0.3086615174,
+        "min": 0.30780903,
+        "max": 0.310034731,
+        "pstdev": 0.0008303658472679667
       },
       "e2e_s": {
         "n": 5,
         "median": 7.183826435,
         "mean": 6.4660066594,
         "min": 4.642861023,
-        "max": 7.550604501
+        "max": 7.550604501,
+        "pstdev": 1.2054287970724622
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1660.8557314569375,
         "mean": 1658.7869574886258,
         "min": 1651.4278847036655,
-        "max": 1663.369005126328
+        "max": 1663.369005126328,
+        "pstdev": 4.455081756594826
       },
       "client_post_first_tps": {
         "n": 5,
         "median": 74.3184782406914,
         "mean": 86.70686172194597,
         "min": 70.57455645510616,
-        "max": 117.8889923860423
+        "max": 117.8889923860423,
+        "pstdev": 19.084943668226384
       },
-      "mtp_acceptance_pct": 61.50740242261104
+      "client_post_first_tpot_ms": {
+        "n": 5,
+        "median": 13.455603823874755,
+        "mean": 12.049599103718199,
+        "min": 8.48255617221135,
+        "max": 14.169412465753423,
+        "pstdev": 2.3588716056345227
+      },
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 2560.0,
+      "mtp_proposed_tokens": 2972.0,
+      "mtp_accepted_tokens": 1828.0,
+      "mtp_acceptance_pct": 61.50740242261104,
+      "output_sha256_by_rep": [
+        "1155eee44c1f9d0230866635886cf3ef33b706b944ee3fc6b2c91246ee0ef7eb",
+        "119167deacc4fd77f909389a7451d7016679787a2333596935d1f17096591bb9",
+        "057e2013e26d4d83845daf2412aec7a874f5f2d203373b97ca6ba76bf24a4b63",
+        "1d1010d4c81ea84bfb8540df48f0bbca5b0ea447f3eb9af878c98d09c66d15f5",
+        "addb3cc22cc6d835f72d96d957ced5f033d7c93bc831ab545047dfe00134b8f3"
+      ]
     },
     {
       "mode": "mtp4",
@@ -345,36 +580,66 @@
       "requested_output_tokens": 32,
       "samples": 5,
       "ignore_eos": true,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 4.912495874,
         "mean": 4.9131683642,
         "min": 4.91045763,
-        "max": 4.915581667
+        "max": 4.915581667,
+        "pstdev": 0.0020209235391356974
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 4.912495874,
+        "mean": 4.9131683642,
+        "min": 4.91045763,
+        "max": 4.915581667,
+        "pstdev": 0.0020209235391356974
       },
       "e2e_s": {
         "n": 5,
         "median": 5.229826059,
         "mean": 5.2448793474,
         "min": 5.22547224,
-        "max": 5.270636152
+        "max": 5.270636152,
+        "pstdev": 0.02060016167248351
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1667.5840978019312,
         "mean": 1667.356129225441,
         "min": 1666.5372594652897,
-        "max": 1668.276282428691
+        "max": 1668.276282428691,
+        "pstdev": 0.685807960362031
       },
       "client_post_first_tps": {
         "n": 5,
         "median": 98.64933405080464,
         "mean": 93.85423743845126,
         "min": 86.35369543257755,
-        "max": 98.85703158330365
+        "max": 98.85703158330365,
+        "pstdev": 6.041466024156473
       },
-      "mtp_acceptance_pct": 83.78378378378379
+      "client_post_first_tpot_ms": {
+        "n": 5,
+        "median": 10.13691587096774,
+        "mean": 10.700354296774194,
+        "min": 10.115618322580646,
+        "max": 11.580280322580645,
+        "pstdev": 0.7073784581980604
+      },
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 40960.0,
+      "mtp_proposed_tokens": 148.0,
+      "mtp_accepted_tokens": 124.0,
+      "mtp_acceptance_pct": 83.78378378378379,
+      "output_sha256_by_rep": [
+        "84c1862de7ab2f45aeebcc196c9654a52ad73ee5b9c052cfb2ec5d24a32edcd3",
+        "0bc008fc73080cfe0e7b7b2ef8e22258996bfed4fe001f671d63897d6c6229dc",
+        "240090020fb184ab9ea64d6e697e6ff383ef09ae3d7019dfee282c3d858bc8ea",
+        "c244bd848c7fb27709af3b67778126b58745f3d8a02de9cb7c0a785d6fc62dff",
+        "fbe531a223b4c421a942b765ef5f33794be43deeaa559f2afc409f3c6e001bec"
+      ]
     },
     {
       "mode": "mtp4",
@@ -384,36 +649,66 @@
       "requested_output_tokens": 128,
       "samples": 5,
       "ignore_eos": true,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 4.909217786,
         "mean": 4.9087072140000005,
         "min": 4.903507914,
-        "max": 4.913058105
+        "max": 4.913058105,
+        "pstdev": 0.0030925469277788497
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 4.909217786,
+        "mean": 4.9087072140000005,
+        "min": 4.903507914,
+        "max": 4.913058105,
+        "pstdev": 0.0030925469277788497
       },
       "e2e_s": {
         "n": 5,
         "median": 6.111945697,
         "mean": 6.0990397908,
         "min": 6.070357694,
-        "max": 6.115512341
+        "max": 6.115512341,
+        "pstdev": 0.017959623261999343
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1668.6976127565101,
         "mean": 1668.8718424610863,
         "min": 1667.3932660521627,
-        "max": 1670.640721637469
+        "max": 1670.640721637469,
+        "pstdev": 1.0516674698444095
       },
       "client_post_first_tps": {
         "n": 5,
         "median": 105.59329241341602,
         "mean": 106.71486980701441,
         "min": 105.32783547133924,
-        "max": 108.84005994327737
+        "max": 108.84005994327737,
+        "pstdev": 1.5369484051293907
       },
-      "mtp_acceptance_pct": 95.14925373134328
+      "client_post_first_tpot_ms": {
+        "n": 5,
+        "median": 9.470298511811023,
+        "mean": 9.372697455118109,
+        "min": 9.187793543307086,
+        "max": 9.494166433070866,
+        "pstdev": 0.13415536249689028
+      },
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 40960.0,
+      "mtp_proposed_tokens": 536.0,
+      "mtp_accepted_tokens": 510.0,
+      "mtp_acceptance_pct": 95.14925373134328,
+      "output_sha256_by_rep": [
+        "966429235a9b5544227d1351812992f286dd560382d23d68abc1b3a5df08f9df",
+        "91289ef530ecdc90e8d2b8d80ef83468a826ae613e5bfd7285f732561aaa1a91",
+        "43610f899bf148f53defaf5ee545998003a1a9d6eb215d337626a442384ad1b6",
+        "345a935ef72f901cd703db57a9a971638ff4fedba5bea199e88110e4b7a5194a",
+        "4f9ac6d21cbc0b4b9f6cfd47246f19d6e287d4f9786b8977053c0176e31dadea"
+      ]
     },
     {
       "mode": "mtp4",
@@ -423,36 +718,66 @@
       "requested_output_tokens": 128,
       "samples": 5,
       "ignore_eos": true,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 5.706911198,
         "mean": 5.707614822,
         "min": 5.704470176,
-        "max": 5.71354653
+        "max": 5.71354653,
+        "pstdev": 0.003129685428831811
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 5.706911198,
+        "mean": 5.707614822,
+        "min": 5.704470176,
+        "max": 5.71354653,
+        "pstdev": 0.003129685428831811
       },
       "e2e_s": {
         "n": 5,
         "median": 6.924741588,
         "mean": 6.9457076304,
         "min": 6.91169218,
-        "max": 7.009601624
+        "max": 7.009601624,
+        "pstdev": 0.03738479183082215
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1655.0108582923142,
         "mean": 1654.8073289211686,
         "min": 1653.088839026222,
-        "max": 1655.7190604198893
+        "max": 1655.7190604198893,
+        "pstdev": 0.9068339281723743
       },
       "client_post_first_tps": {
         "n": 5,
         "median": 104.85511739926535,
         "mean": 102.67273325872976,
         "min": 97.52406899590137,
-        "max": 105.41335055702265
+        "max": 105.41335055702265,
+        "pstdev": 3.099973540242698
       },
-      "mtp_acceptance_pct": 91.48550724637681
+      "client_post_first_tpot_ms": {
+        "n": 5,
+        "median": 9.53696896062992,
+        "mean": 9.748762270866141,
+        "min": 9.48646442519685,
+        "max": 10.253878968503937,
+        "pstdev": 0.3007149182249416
+      },
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 47225.0,
+      "mtp_proposed_tokens": 552.0,
+      "mtp_accepted_tokens": 505.0,
+      "mtp_acceptance_pct": 91.48550724637681,
+      "output_sha256_by_rep": [
+        "7bb55b463ce1508bd8d99a7e64ac49e8aa4fb377220c9a68c80329ab1711bc03",
+        "e608d76b5f277e20bbc4cca745d3b7d8fb9afa538f3990b4b6384b14c708d9df",
+        "5e57cac2e8bc81aa750f22b7e7eb7db42bc6b6901386eab057c16fad2ec5c4ed",
+        "db1c02dbfd531d5f8afb02c0e03b13c4a4ce4cbf7046c9476d934822fe36786b",
+        "142fdffad277f55a8dc7d299846375c15e452c3bdd6cb9644f4143a20eb19fe1"
+      ]
     },
     {
       "mode": "mtp4",
@@ -462,36 +787,66 @@
       "requested_output_tokens": 256,
       "samples": 5,
       "ignore_eos": true,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 4.902856884,
         "mean": 4.9031476728,
         "min": 4.901483221,
-        "max": 4.905468524
+        "max": 4.905468524,
+        "pstdev": 0.0014534629006056072
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 4.902856884,
+        "mean": 4.9031476728,
+        "min": 4.901483221,
+        "max": 4.905468524,
+        "pstdev": 0.0014534629006056072
       },
       "e2e_s": {
         "n": 5,
         "median": 8.11745673,
         "mean": 8.0275754502,
         "min": 7.646287074,
-        "max": 8.215226994
+        "max": 8.215226994,
+        "pstdev": 0.20133745631492508
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1670.8625590793401,
         "mean": 1670.763612773215,
         "min": 1669.9730025624767,
-        "max": 1671.330825922662
+        "max": 1671.330825922662,
+        "pstdev": 0.49520901336955964
       },
       "client_post_first_tps": {
         "n": 5,
         "median": 79.39007980280236,
         "mean": 81.98453033880074,
         "min": 76.98415078380236,
-        "max": 92.98897901622223
+        "max": 92.98897901622223,
+        "pstdev": 5.730407542365519
       },
-      "mtp_acceptance_pct": 65.9090909090909
+      "client_post_first_tpot_ms": {
+        "n": 5,
+        "median": 12.596032180392157,
+        "mean": 12.252657950588235,
+        "min": 10.75396257254902,
+        "max": 12.989686705882352,
+        "pstdev": 0.7909787406648664
+      },
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 40960.0,
+      "mtp_proposed_tokens": 1408.0,
+      "mtp_accepted_tokens": 928.0,
+      "mtp_acceptance_pct": 65.9090909090909,
+      "output_sha256_by_rep": [
+        "c23b902ed7b6fa68df76515114fc9e791244ce653aa93a38fe37f08659b55711",
+        "19b0327c7adf93688116e8a559e557c4ac16be8379d7d45463652ad8094fd200",
+        "7b5309740b3e729efdc72bed32fc4241e9556c607f4e5df230d54002085ef102",
+        "6135beb98838c96c8fa28eacb875381f55797d7ccb81f5314e9083c85b1276eb",
+        "ce0e10ff56be8c53977b34bed3373b595b4d1ac6db51ecc52bf792927d7a1320"
+      ]
     },
     {
       "mode": "mtp4",
@@ -501,36 +856,66 @@
       "requested_output_tokens": 512,
       "samples": 5,
       "ignore_eos": true,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 4.907198168,
         "mean": 4.90621596,
         "min": 4.901310455,
-        "max": 4.908966585
+        "max": 4.908966585,
+        "pstdev": 0.002726926598201972
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 4.907198168,
+        "mean": 4.90621596,
+        "min": 4.901310455,
+        "max": 4.908966585,
+        "pstdev": 0.002726926598201972
       },
       "e2e_s": {
         "n": 5,
         "median": 12.698059842,
         "mean": 12.4978886348,
         "min": 11.192861364,
-        "max": 13.693886141
+        "max": 13.693886141,
+        "pstdev": 0.8438383616485416
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 1669.3843858640762,
         "mean": 1669.7191070964534,
         "min": 1668.783003133846,
-        "max": 1671.389738563296
+        "max": 1671.389738563296,
+        "pstdev": 0.9285008997354957
       },
       "client_post_first_tps": {
         "n": 5,
         "median": 65.58966406826747,
         "mean": 68.18037731895419,
         "min": 58.16786331879303,
-        "max": 81.27294479168877
+        "max": 81.27294479168877,
+        "pstdev": 7.873803844929533
       },
-      "mtp_acceptance_pct": 49.53488372093023
+      "client_post_first_tpot_ms": {
+        "n": 5,
+        "median": 15.246304645792566,
+        "mean": 14.856502299021527,
+        "min": 12.304217628180037,
+        "max": 17.191623397260276,
+        "pstdev": 1.6505838458521565
+      },
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 40960.0,
+      "mtp_proposed_tokens": 3440.0,
+      "mtp_accepted_tokens": 1704.0,
+      "mtp_acceptance_pct": 49.53488372093023,
+      "output_sha256_by_rep": [
+        "35ac77512dfc285e243121640c322ab498c2b426e96faba8d53b803c3e72c702",
+        "b76aa645e7ea268400efc92abc112538ea97e414bc704e7a11a8240ff6cc2481",
+        "265b687d7740340c922a4f730a0942d21f487e6954055d739cfc667f0c2083fa",
+        "2d09dbec3128a5666973b4eea13c03c5f25af696e3142f5f683b4c8790cbb8cb",
+        "ee750c7afca974bf2a5f5752960a383e74e46f9921960ccceaaf3909a7d0af83"
+      ]
     },
     {
       "mode": "mtp4",
@@ -540,30 +925,52 @@
       "requested_output_tokens": 1,
       "samples": 5,
       "ignore_eos": false,
-      "_validation": "pass",
       "ttft_s": {
         "n": 5,
         "median": 184.390183662,
         "mean": 184.3830800278,
         "min": 184.348750004,
-        "max": 184.416095592
+        "max": 184.416095592,
+        "pstdev": 0.025896138413650682
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 184.390183662,
+        "mean": 184.3830800278,
+        "min": 184.348750004,
+        "max": 184.416095592,
+        "pstdev": 0.025896138413650682
       },
       "e2e_s": {
         "n": 5,
         "median": 184.390349215,
         "mean": 184.383251811,
         "min": 184.348918717,
-        "max": 184.416265436
+        "max": 184.416265436,
+        "pstdev": 0.025898342807149546
       },
       "input_tokens_per_ttft_s": {
         "n": 5,
         "median": 710.8350205901537,
         "mean": 710.862420595928,
         "min": 710.735142609135,
-        "max": 710.9947856828757
+        "max": 710.9947856828757,
+        "pstdev": 0.09984093330862727
       },
       "client_post_first_tps": null,
-      "mtp_acceptance_pct": null
+      "client_post_first_tpot_ms": null,
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 655355.0,
+      "mtp_proposed_tokens": 0,
+      "mtp_accepted_tokens": 0,
+      "mtp_acceptance_pct": null,
+      "output_sha256_by_rep": [
+        "0cb738e14b3027b74a23294c9298d1e1593bf39127576b780b2b672fde8a7446",
+        "0cb738e14b3027b74a23294c9298d1e1593bf39127576b780b2b672fde8a7446",
+        "0cb738e14b3027b74a23294c9298d1e1593bf39127576b780b2b672fde8a7446",
+        "0cb738e14b3027b74a23294c9298d1e1593bf39127576b780b2b672fde8a7446",
+        "0cb738e14b3027b74a23294c9298d1e1593bf39127576b780b2b672fde8a7446"
+      ]
     },
     {
       "mode": "mtp4",
@@ -571,13 +978,68 @@
       "class": "decode_full_context",
       "prompt_tokens": 130944,
       "requested_output_tokens": 128,
-      "status": "pending",
-      "samples": 0,
-      "ttft_s": null,
-      "e2e_s": null,
-      "input_tokens_per_ttft_s": null,
-      "client_post_first_tps": null,
-      "mtp_acceptance_pct": null
+      "samples": 5,
+      "ignore_eos": true,
+      "ttft_s": {
+        "n": 5,
+        "median": 184.360771232,
+        "mean": 184.3813404298,
+        "min": 184.34990385,
+        "max": 184.428823556,
+        "pstdev": 0.030949038845718858
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 184.360771232,
+        "mean": 184.3813404298,
+        "min": 184.34990385,
+        "max": 184.428823556,
+        "pstdev": 0.030949038845718858
+      },
+      "e2e_s": {
+        "n": 5,
+        "median": 186.511412739,
+        "mean": 186.5320988894,
+        "min": 186.371337561,
+        "max": 186.665813013,
+        "pstdev": 0.11362224425963603
+      },
+      "input_tokens_per_ttft_s": {
+        "n": 5,
+        "median": 710.2595586087009,
+        "mean": 710.180343541104,
+        "min": 709.9974801945215,
+        "max": 710.3014282369531,
+        "pstdev": 0.11919609674054568
+      },
+      "client_post_first_tps": {
+        "n": 5,
+        "median": 60.35488187704648,
+        "mean": 59.17851373789483,
+        "min": 55.07846414032348,
+        "max": 62.82669538402687,
+        "pstdev": 2.751480544331742
+      },
+      "client_post_first_tpot_ms": {
+        "n": 5,
+        "median": 16.568668000000002,
+        "mean": 16.935105981102364,
+        "min": 15.916800874015747,
+        "max": 18.15591657480315,
+        "pstdev": 0.7980729602179998
+      },
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 654720.0,
+      "mtp_proposed_tokens": 624.0,
+      "mtp_accepted_tokens": 494.0,
+      "mtp_acceptance_pct": 79.16666666666667,
+      "output_sha256_by_rep": [
+        "0e1f360f6d22afd89c6b193023c89876559451f88e39c798492ceb12d0458a2a",
+        "6bcb3ac81a779c2be6f1252ce358e23b14f47a0d1e58e53bab2142b38959524f",
+        "7968c5a083835ec1ed3ff13e355c90b8a36fb035542a9ed1a84e71499a97cb39",
+        "f217b04d986e24e0e7d2b955ba1cf2a2ba783b6b258ddefb84c40c808805c347",
+        "2677c1c6451086ed05eecd2e0d13cea6a6dea3da13cd479e87f6746a6fa96703"
+      ]
     },
     {
       "mode": "mtp4",
@@ -585,13 +1047,68 @@
       "class": "decode_full_context",
       "prompt_tokens": 130560,
       "requested_output_tokens": 512,
-      "status": "pending",
-      "samples": 0,
-      "ttft_s": null,
-      "e2e_s": null,
-      "input_tokens_per_ttft_s": null,
-      "client_post_first_tps": null,
-      "mtp_acceptance_pct": null
+      "samples": 5,
+      "ignore_eos": true,
+      "ttft_s": {
+        "n": 5,
+        "median": 183.749844822,
+        "mean": 183.7524787636,
+        "min": 183.726177271,
+        "max": 183.780597643,
+        "pstdev": 0.02040251913968339
+      },
+      "ttfc_s": {
+        "n": 5,
+        "median": 183.749844822,
+        "mean": 183.7524787636,
+        "min": 183.726177271,
+        "max": 183.780597643,
+        "pstdev": 0.02040251913968339
+      },
+      "e2e_s": {
+        "n": 5,
+        "median": 194.593228077,
+        "mean": 194.4083031156,
+        "min": 193.80288171,
+        "max": 194.905861967,
+        "pstdev": 0.41444374879164686
+      },
+      "input_tokens_per_ttft_s": {
+        "n": 5,
+        "median": 710.5312122928569,
+        "mean": 710.5210361680215,
+        "min": 710.4123159595836,
+        "max": 710.6227427103173,
+        "pstdev": 0.07889003412442161
+      },
+      "client_post_first_tps": {
+        "n": 5,
+        "median": 47.259545502746064,
+        "mean": 48.02921373746404,
+        "min": 45.80487761521812,
+        "max": 50.93296133976887,
+        "pstdev": 1.9020892773457831
+      },
+      "client_post_first_tpot_ms": {
+        "n": 5,
+        "median": 21.159746446183956,
+        "mean": 20.85288522896282,
+        "min": 19.63365124853229,
+        "max": 21.83173609589041,
+        "pstdev": 0.8139544008450402
+      },
+      "prefix_cache_hits_delta": 0.0,
+      "prefix_cache_queries_delta": 652800.0,
+      "mtp_proposed_tokens": 3024.0,
+      "mtp_accepted_tokens": 1805.0,
+      "mtp_acceptance_pct": 59.689153439153436,
+      "output_sha256_by_rep": [
+        "7f4c83371fb4d45d0f033e80d3782c520045e109eed7d87597ed5f00a15dab3f",
+        "6b232032820dd246bf6006f90bb5f68cab5a011ac158f42a7ca447ba7770d8bd",
+        "2d7b1fbf290f473f0e5d105b6c047d524793550a9e56ca2fda0076f89b17f088",
+        "6d52255c3c3230eae45ee7b76bc451cc372eb28eb21ea5bf4775f3278359e025",
+        "9647f6a8d4860f321c7cc40a6c6f2634c6da1da3388f8079ff2a3d6f26d0bd4c"
+      ]
     }
   ]
 }

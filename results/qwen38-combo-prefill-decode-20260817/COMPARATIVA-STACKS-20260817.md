@@ -111,4 +111,4 @@ gdn_split, ptr_wrap). Para reproducir SU config completa: `launch_sergio_qwen38.
 
 ---
 
-*Versión pública de la comparativa interna del proyecto, adaptada para el fork popisec* *(rutas de host y nombres de máquina eliminados). La matriz de mediciones regenerable está en `summary.json` (snapshot) y `tables.md`.*
+*Versión pública de la comparativa interna del proyecto, adaptada para el fork popisec* *(rutas de host y nombres de máquina eliminados). La matriz de mediciones regenerable está en `summary.json` y `tables.md`.*
